@@ -1,0 +1,5 @@
+Lenguaje: R
+Temas:
+1. Determinar si una dirección de correo electrónico es válida. Considere direcciones donde el nombre de usuario puede contener separadores como: ., _, -. El sufijo de dominios solo puede contener: -, _, y el punto se usa para separar un nombre de dominio de otro. Un sufijo puede tener un solo dominio. Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
+
+2. Determinar si el formato de una dirección URL es válida. Una dirección válida de URL debe contener de forma opcional el protocolo (http://, https://, ftp://, etc), uno o más subdominios separados por punto, y por último cero o más carpetas separadas por slash (/), donde puede o no terminar con /. Nota: revisar el ejercicio 1 para que observe algunos dominios válidos. En los ejemplos se observan los dominios después de la @
