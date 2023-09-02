@@ -33,6 +33,14 @@ user <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
 
 domain <- "@[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
-
 email <- paste0("^", user, domain, "$")
-email
+
+if (length(commandArgs(trailingOnly = TRUE)) != 0) {
+  args <- commandArgs(trailingOnly = TRUE)
+
+  for (i in 1:length(args)) {
+    test <- args[i]
+    result <- str_detect(test, email)
+    cat(test, if (result) "es valido" else "no es valido", "\n")
+  }
+}
