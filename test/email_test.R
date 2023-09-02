@@ -6,7 +6,7 @@ library(testthat)
 
 source('src/email.R', chdir = TRUE)
 
-test_that("Validación de dirección de correo electrónico", {
+test_that("Dirección de correo electrónico validas", {
   # Emails válidos
   expect_true(str_detect("usuario@example.com", email))
   expect_true(str_detect("us-er.name@domain.co", email))
@@ -23,10 +23,13 @@ test_that("Validación de dirección de correo electrónico", {
   expect_true(str_detect("usuario@sub.domain.example.com", email))
 
   # URLs inválidos
+  expect_false(str_detect("user..name@domain.com", email))
+  expect_false(str_detect("user.name@domain..com", email))
   expect_false(str_detect("usuarioexample.com", email))
   expect_false(str_detect("@domain.com", email))
   expect_false(str_detect("usuario@.com", email))
   expect_false(str_detect("usuario@-domain.com", email))
   expect_false(str_detect("usuario@domain-.com", email))
   expect_false(str_detect("usuario@do--main.com", email))
+  
 })

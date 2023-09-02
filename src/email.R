@@ -16,10 +16,11 @@ library(stringr)
 
 # Usuario
 # Debe comenzar con una letra o un número.
-# Considere direcciones donde el nombre de usuario puede contener separadores como: ., _, -.
-# No se permiten dos caracteres especiales consecutivos (por ejemplo, "..").
+# No se permiten dos caracteres especiales consecutivos 
 # La longitud mínima del usuario es 1 carácter.
 # La longitud máxima del usuario depende de la implementación del servidor de correo, pero generalmente se encuentra entre 1 y 64 caracteres.
+
+user <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
 
 # Dominio
 # Debe comenzar con una letra o un número.
@@ -31,5 +32,7 @@ library(stringr)
 # La longitud del dominio generalmente no debe superar los 253 caracteres (depende del servidor)
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
 
-# TODO: match any
-email <- "."
+domain <- "@[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
+
+email <- paste0("^", user, domain, "$")
+email
