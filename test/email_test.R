@@ -1,5 +1,10 @@
+if (!requireNamespace("testthat", quietly = TRUE)) {
+  install.packages("testthat")
+}
+
 library(testthat)
-source('email.R', chdir = TRUE)
+
+source('src/email.R', chdir = TRUE)
 
 test_that("Validación de dirección de correo electrónico", {
   expect_true(str_detect("usuario@example.com", email))
