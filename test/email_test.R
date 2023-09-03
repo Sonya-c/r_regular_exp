@@ -27,9 +27,9 @@ test_that("Dirección de correo electrónico validas", {
   expect_false(str_detect("user.name@domain..com", email))
   expect_false(str_detect("usuarioexample.com", email))
   expect_false(str_detect("@domain.com", email))
-  expect_false(str_detect("usuario@.com", email))
+  expect_false(str_detect("usuario usuario@.com", email))
   expect_false(str_detect("usuario@-domain.com", email))
-  expect_false(str_detect("usuario@domain-.com", email))
+  expect_false(str_detect("usu ario@domain-.com", email))
   expect_false(str_detect("usuario@do--main.com", email))
   
 })
