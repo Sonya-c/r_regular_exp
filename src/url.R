@@ -21,8 +21,8 @@ protocolo <-"[[:alpha:]]+://"
 # La longitud del dominio generalmente no debe superar los 253 caracteres (depende del servidor)
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
 
-domain <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
-folder <- "(/[[:alnum:]]((-|_|\\.|-|%|\\$|#|&)?[[:alnum:]])*)*(/)?"
+domain <- "([[:alnum:]]((-|_|\\.)?[[:alnum:]])*)?"
+folder <- "(/?[[:alnum:]]((-|_|\\.|-|%|\\$|#|&)?[[:alnum:]])*)*(/)?"
 
 url <- paste0("^", protocolo,domain,folder, "$")
 
