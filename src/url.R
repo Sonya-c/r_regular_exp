@@ -9,7 +9,7 @@ library(stringr)
 # Una dirección válida de URL debe contener de forma opcional el protocolo (http://, https://, ftp://, etc), uno o más subdominios separados por punto, y por último cero o más carpetas separadas por slash (/), donde puede o no terminar con /.
 # protocolo://subdominio.dominio.extension/carpeta/carpeta/
 
-protocolo <-"[[:alpha:]]+://"
+protocolo <-"([[:alpha:]]+://)?"
 
 # Dominio
 # Debe comenzar con una letra o un número.
@@ -20,11 +20,11 @@ protocolo <-"[[:alpha:]]+://"
 # Un sufijo puede tener un solo dominio
 # La longitud del dominio generalmente no debe superar los 253 caracteres (depende del servidor)
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
+domain <- "[[:alnum:]]((-|_)?[[:alnum:]])*"
+subdomain <- "([[:alnum:]]((-|_|\\.)?[[:alnum:]])*)+"
+folder <- "(/?[[:alnum:]]((\\$|_|\\.|\\+|!|\\*|'|\\(|\\)|\\,|\\%)?[[:alnum:]])*)*(/)?"
 
-domain <- "([[:alnum:]]((-|_|\\.)?[[:alnum:]])*)?"
-folder <- "(/?[[:alnum:]]((-|_|\\.|-|%|\\$|#|&)?[[:alnum:]])*)*(/)?"
-
-url <- paste0("^", protocolo,domain,folder, "$")
+url <- paste0("^", protocolo,subdomain,"\\.",domain,folder, "$")
 
 if (length(commandArgs(trailingOnly = TRUE)) != 0) {
   # Obtener los casos de prueba por argumentos 
