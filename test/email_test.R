@@ -1,3 +1,5 @@
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
 if (!requireNamespace("testthat", quietly = TRUE)) {
   install.packages("testthat")
 }

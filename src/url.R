@@ -1,3 +1,5 @@
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
 if (!requireNamespace("stringr", quietly = TRUE)) {
   install.packages("stringr")
 }
@@ -25,11 +27,22 @@ folder <- "(/[[:alnum:]]((-|_|\\.|-|%|\\$|#|&)?[[:alnum:]])*)*(/)?"
 url <- paste0("^", protocolo,domain,folder, "$")
 
 if (length(commandArgs(trailingOnly = TRUE)) != 0) {
-  args <- commandArgs(trailingOnly = TRUE)
+  # Obtener los casos de prueba por argumentos 
+  tests <- commandArgs(trailingOnly = TRUE)
+} else {
+  if (interactive()) {
+    # Obtener los casos de prueba leyendolso 
+    cat("Ingrese los casos de prueba (escribir el caso entre comillas si se incluyen espacios)\n")
+    tests = scan(what = " ")
+  } else {
+    tests = c()
+  }
+} 
 
-  for (i in 1:length(args)) {
-    test <- args[i]
+if (length((tests)) >= 1) {
+  for (i in 1:length(tests)) {
+    test <- tests[i]
     result <- str_detect(test, url)
-    cat(test, if (result) "es valido" else "no es valido", "\n")
+    cat(i, ":", test, if (result) "es valido" else "no es valido", "\n")
   }
 }
