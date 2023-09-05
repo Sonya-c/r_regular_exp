@@ -5,6 +5,26 @@ Temas:
 
 Ejecutar: Rscript email.R <correo_1> <correo_2> ... <correo_n>
 
+Explicación: 
+Una dirección de correo electrónico debe constar de dos partes separadas por el símbolo "@". el usuario (parte izquierda) y el dominio (parte derecha). En ninguno de los casos se permiten caracteres especiales al principio o al final,ni de forma consecutiva. Tampoco se permiten espacios en blanco.
+
+Empecemos por el usuario. El usuario debe tener un número o caracter como minimo. 
+
+part <- "[[:alnum:]]"
+
+A ese le pueden seguir más letras o números (0 o más)
+
+part <- "[[:alnum:]]([[:alnum:]])*"
+
+Y, de forma opcional, puede tener caracteres especiales como punto (.), guión (-), guión bajo (_). Estos no pueden ser consecitivos, ni pueden estar al final del nombre, por lo que siempre deben estar acompañados de un caracter o número.
+
+part <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
+
+De forma similar, se puede construir el dominio. Simplemente estaría acompañado por un arroba (@). Ahora, podemos unir estas dos partes. Además del arroba, debemos incluir "^" al comienzo y "$" al final para no se acepten soluciones parciales. 
+
+email <- paste0("^", part, "@", part, "$")
+
+
 2. Determinar si el formato de una dirección URL es válida. Una dirección válida de URL debe contener de forma opcional el protocolo (http://, https://, ftp://, etc), uno o más subdominios separados por punto, y por último cero o más carpetas
 separadas por slash (/), donde puede o no terminar con /. Nota: revisar el ejercicio 1 para que observe algunos dominios válidos. En los ejemplos se observan los dominios después de la @.
 

@@ -22,8 +22,6 @@ library(stringr)
 # La longitud mínima del usuario es 1 carácter.
 # La longitud máxima del usuario depende de la implementación del servidor de correo, pero generalmente se encuentra entre 1 y 64 caracteres.
 
-user <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
-
 # Dominio
 # Debe comenzar con una letra o un número.
 # El sufijo de dominios solo puede contener: -, _, 
@@ -34,8 +32,9 @@ user <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
 # La longitud del dominio generalmente no debe superar los 253 caracteres (depende del servidor)
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
 
-domain <- "@[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
-email <- paste0("^", user, domain, "$")
+part <- "[[:alnum:]]((-|_|\\.)?[[:alnum:]])*"
+
+email <- paste0("^", part, "@", part, "$")
 
 if (length(commandArgs(trailingOnly = TRUE)) != 0) {
   # Obtener los casos de prueba por argumentos 
