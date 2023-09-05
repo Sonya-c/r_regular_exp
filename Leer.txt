@@ -28,7 +28,7 @@ if (length(commandArgs(trailingOnly = TRUE)) != 0) {
 } else {
   if (interactive()) {
     # Obtener los casos de prueba leyendolso 
-    cat("Ingrese los casos de prueba (escribir el caso entre comillas si se incluyen espacios)\n")
+    cat("Ingrese los casos de prueba (escribir el caso entre comillas si se incluyen espacios )\n")
     tests = scan(what = " ")
   } else {
     tests = c()
