@@ -8,4 +8,39 @@ Ejecutar: Rscript email.R <correo_1> <correo_2> ... <correo_n>
 2. Determinar si el formato de una dirección URL es válida. Una dirección válida de URL debe contener de forma opcional el protocolo (http://, https://, ftp://, etc), uno o más subdominios separados por punto, y por último cero o más carpetas
 separadas por slash (/), donde puede o no terminar con /. Nota: revisar el ejercicio 1 para que observe algunos dominios válidos. En los ejemplos se observan los dominios después de la @.
 
+Para este caso se descompone la expresión regular en 4 secciones; protocol, subdomain domain y folder.
+Protocol: Hace referencia a todos los posibles protocolos que pueden utilizarse para crear una dirección URL. Este se define como una combinación de un grupo de letras seguido de "://".
+    protocolo <-"([[:alpha:]]+://)?"
+domain: Aquí se define el dominio que debe tener una URL. Puede contener caracteres alfanuméricos, así como también "-" o "_" (Ninguno de estos dos caracteres puede ir seguido del otro o del mismo).
+    domain <- "[[:alnum:]]((-|_)?[[:alnum:]])*"
+subdomain: En esta sección se definen todos los subdominios adicionales que puede contener la URL. Estos son opcionales pero siguen las mismas reglas que el dominio.
+    subdomain <- "([[:alnum:]]((-|_|\\.)?[[:alnum:]])*)+"
+folder:Aquí se definen las posibles carpetas que pueden encontrarse en la URL, también opcionales. Estas carpetas pueden contener algunos caracteres especiales que son utilizados operativamente por la URL.
+    folder <- "(/?[[:alnum:]]((\\$|_|\\.| \\!|\\*|\\'|\\(|\\)|\\;|\\:|\\@|\\&|\\=|\\+|\\$|\\,|\\/|\\?|\\%|\\#|\\[|\\])?[[:alnum:]])*)*(/)?"
+
+URL:  En esta parte, se concatenan las cuatro partes que deben conformar una URL válida.
+    url <- paste0("^", protocolo,subdomain,"\\.",domain,folder, "$")
+Finalmente, se agrega una función que permite recibir direcciones URL como parámetros para aplicar la expresión regular a estas.
+
+if (length(commandArgs(trailingOnly = TRUE)) != 0) {
+  # Obtener los casos de prueba por argumentos 
+  tests <- commandArgs(trailingOnly = TRUE)
+} else {
+  if (interactive()) {
+    # Obtener los casos de prueba leyendolso 
+    cat("Ingrese los casos de prueba (escribir el caso entre comillas si se incluyen espacios)\n")
+    tests = scan(what = " ")
+  } else {
+    tests = c()
+  }
+} 
+
+if (length((tests)) >= 1) {
+  for (i in 1:length(tests)) {
+    test <- tests[i]
+    result <- str_detect(test, url)
+    cat(i, ":", test, if (result) "es valido" else "no es valido", "\n")
+  }
+}
+
 Ejecutar: Rscript url.R <url_1> <url_2> ... <url_n>

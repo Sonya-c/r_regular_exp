@@ -22,7 +22,9 @@ protocolo <-"([[:alpha:]]+://)?"
 # Ejemplo: casi_miro1@co, 12_prueba.curso-1@lata_m1.db, ramir_2@13_ca.bar_q.co.
 domain <- "[[:alnum:]]((-|_)?[[:alnum:]])*"
 subdomain <- "([[:alnum:]]((-|_|\\.)?[[:alnum:]])*)+"
-folder <- "(/?[[:alnum:]]((\\$|_|\\.|\\+|!|\\*|'|\\(|\\)|\\,|\\%)?[[:alnum:]])*)*(/)?"
+folder <- "(/?[[:alnum:]]((\\$|_|\\.| \\!|\\*|\\'|\\(|\\)|\\;|\\:|\\@|\\&|\\=|\\+|\\$|\\,|\\/|\\?|\\%|\\#|\\[|\\])?[[:alnum:]])*)*(/)?"
+
+
 
 url <- paste0("^", protocolo,subdomain,"\\.",domain,folder, "$")
 
